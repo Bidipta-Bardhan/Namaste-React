@@ -1,0 +1,20 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "\"This is namaste react\"",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "\"Bidipta Bardhan\"",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.16.0"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "browsersList": [
+    "last 2 versions"
+  ]
+}
