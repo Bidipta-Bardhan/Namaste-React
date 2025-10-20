@@ -1,0 +1,35 @@
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid burlywood;
+    padding: 1rem;
+ }
+ .img-logo{
+    height: 6.25rem;
+    width: 9.375rem;
+    border-radius: 0.313rem;
+ }
+ .nav-items>ul{
+    display: flex;
+    gap: 1rem
+ }
+ .nav-items>ul>li{
+    list-style-type: none;
+    font-size: 1.5rem;
+ }
+ .img-res{
+    height: 200px;
+    width: 100%;
+ }
+ .res-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem
+ }
+ .res-card-container{
+    border: 1px solid coral;
+    width: 214px;
+    padding: 0.25rem;
+    border-radius: 0.3rem;
+ }
