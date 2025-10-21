@@ -33,3 +33,8 @@
     padding: 0.25rem;
     border-radius: 0.3rem;
  }
+ .filter-btn{
+   margin: 1rem 0rem;
+   cursor: pointer;
+   padding: 1rem;
+ }
