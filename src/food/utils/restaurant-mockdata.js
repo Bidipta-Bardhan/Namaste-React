@@ -1,43 +1,3 @@
-import ReactDOM from "react-dom/client";
-const HeaderComponent = () => (
-  <div className="header-container">
-    <div className="logo-container">
-      <img
-        src="https://cdn.dribbble.com/userupload/14994872/file/original-eaebb08322598d5c0889a4c096c6c4f7.jpg?resize=400x0"
-        alt="logo"
-        className="img-logo"
-      ></img>
-    </div>
-    <div className="nav-items">
-      <ul>
-        <li>Home</li>
-        <li>About Us</li>
-        <li>Contact Us</li>
-        <li>Cart</li>
-      </ul>
-    </div>
-  </div>
-);
-const RestaurantCard = (props) => {
-  const { resData } = props;
-  return (
-    <div className="res-card-container">
-          <img
-              className="img-res"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          resData.info.cloudinaryImageId
-        }
-      ></img>
-      <div>{resData.info.name}</div>
-      <div>{resData.info.cuisines.join(", ")}</div>
-      <div>{resData.info.avgRating} stars</div>
-      <div>{resData.info.costForTwo}</div>
-      <div>{resData.info.sla.deliveryTime} minutes</div>
-    </div>
-  );
-};
-
 const resDataArray = [
   {
     info: {
@@ -1611,21 +1571,4 @@ const resDataArray = [
     },
   },
 ];
-const Body = () => (
-  <div className="body-container">
-    <div className="search-bar">Search</div>
-    <div className="res-container">
-            {resDataArray.map(resObj => {
-                return <RestaurantCard key={resObj.info.id} resData={ resObj} />
-      })}
-    </div>
-  </div>
-);
-const AppLayout = () => (
-  <div className="app-container">
-    <HeaderComponent />
-    <Body />
-  </div>
-);
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+export default resDataArray
