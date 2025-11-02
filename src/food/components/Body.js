@@ -3,9 +3,18 @@ import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 // useState use difference algorithm for virtual dom, which spot difference and render quickly so that   UI and data layer is in sync
 const Body = () => {
+  /**
+   * Always have useState variables at the start of component
+   * Do not write state variables inside if, for or functions it is used for DOM manipulation
+   */  
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filterListRes, setFilterListRes] = useState([]);
-  const [searchText, setSearchText] = useState("");
+    const [searchText, setSearchText] = useState("");
+  /**
+   *  Use effect without any dependency array will get called on every render of component
+   *  Use effect with empty dependency array will get called only once on initial load
+   *  Use effect with a state variable on depency array will get called every time that variable gets updated  
+   * */  
   useEffect(() => {
     fetchData();
   }, []);
