@@ -1,3 +1,4 @@
+import { RES_LIST_URL } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
@@ -6,34 +7,32 @@ const Body = () => {
   /**
    * Always have useState variables at the start of component
    * Do not write state variables inside if, for or functions it is used for DOM manipulation
-   */  
+   */
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filterListRes, setFilterListRes] = useState([]);
-    const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
   /**
    *  Use effect without any dependency array will get called on every render of component
    *  Use effect with empty dependency array will get called only once on initial load
-   *  Use effect with a state variable on depency array will get called every time that variable gets updated  
-   * */  
+   *  Use effect with a state variable on depency array will get called every time that variable gets updated
+   * */
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4600098&lng=88.38217069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(RES_LIST_URL);
     const json = await data.json();
     console.log(json);
     console.log(
-      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setListOfRestaurants(
-      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilterListRes(
-      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
@@ -50,12 +49,18 @@ const Body = () => {
               setSearchText(e.target.value);
             }}
           ></input>
-                      <button onClick={() => {
-                        const searchList = listOfRestaurants.filter(
-                          (item) => item?.info?.name?.toLowerCase().includes(searchText?.toLowerCase())
-                          );  
-                          setFilterListRes(searchList);
-          }} >Search</button>
+          <button
+            onClick={() => {
+              const searchList = listOfRestaurants.filter((item) =>
+                item?.info?.name
+                  ?.toLowerCase()
+                  .includes(searchText?.toLowerCase())
+              );
+              setFilterListRes(searchList);
+            }}
+          >
+            Search
+          </button>
         </div>
         <button
           className="filter-btn"
