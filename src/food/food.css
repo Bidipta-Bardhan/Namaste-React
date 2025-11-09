@@ -1,4 +1,4 @@
-.header-container{
+/* .header-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +12,9 @@
  }
  .nav-items>ul{
     display: flex;
-    gap: 1rem
+    gap: 1rem;
+    list-style-type: none;
+    align-items: center;
  }
  .nav-items>ul>li{
     list-style-type: none;
@@ -55,4 +57,8 @@
  }
  .search-container{
    display: flex;
- }
+ } */
+@import "tailwindcss";
+.nav-items >ul li{
+   @apply hover:text-2xl;
+}

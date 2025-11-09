@@ -1,5 +1,6 @@
 import { RES_LIST_URL } from "../utils/constants";
-import RestaurantCard from "./RestaurantCard";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import RestaurantCard, { withVeg } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 // useState use difference algorithm for virtual dom, which spot difference and render quickly so that   UI and data layer is in sync
@@ -36,20 +37,26 @@ const Body = () => {
         ?.restaurants
     );
   };
+  console.log(filterListRes);
+  const RestaurantCardVeg = withVeg(RestaurantCard);
+  const onlineStatus = useOnlineStatus();
+  if(!onlineStatus) return <h1>You are offline!! Please check your internet connectivity</h1>
   return filterListRes.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body-container">
-      <div className="search-filter">
-        <div className="search-container">
+    <div className="body-container m-4">
+      <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-2">
           <input
             type="text"
+            className=" border border-black rounded-lg"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           ></input>
           <button
+            className="bg-amber-100 p-2 rounded-md hover:scale-110"
             onClick={() => {
               const searchList = listOfRestaurants.filter((item) =>
                 item?.info?.name
@@ -63,7 +70,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="filter-btn"
+          className="bg-pink-100 p-2 rounded-md hover:scale-110"
           onClick={() => {
             const filteredResList = listOfRestaurants.filter(
               (item) => item.info.avgRating >= 4.5
@@ -74,9 +81,13 @@ const Body = () => {
           Top Rated Restaurant
         </button>
       </div>
-      <div className="res-container">
-        {filterListRes.map((resObj) => {
-          return <RestaurantCard key={resObj.info.id} resData={resObj} />;
+      <div className="flex flex-wrap gap-4">
+          {filterListRes.map((resObj) => {
+            return resObj?.info?.veg ? (
+              <RestaurantCardVeg key={resObj.info.id} resData={resObj} />
+            ) : (
+              <RestaurantCard key={resObj.info.id} resData={resObj} />
+            );
         })}
       </div>
     </div>
