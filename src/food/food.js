@@ -5,15 +5,19 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import RestaurantMenuCard from "./components/RestaurantMenuCard";
-import { Suspense,lazy } from "react";
-
+import { Suspense, lazy } from "react";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 const AppLayout = () => (
-  <div className="app-container">
-    <HeaderComponent />
-    <Outlet/>
-  </div>
+  <Provider store={appStore}>
+    <div className="app-container">
+      <HeaderComponent />
+      <Outlet />
+    </div>
+  </Provider>
 );
-// Chunking/ Code Splitting/ Lazy Loading/ On demand loading / dynamic bundling/ dynamic import 
+// Chunking/ Code Splitting/ Lazy Loading/ On demand loading / dynamic bundling/ dynamic import
 const Grocery = lazy(() => import("./components/Grocery"));
 const appRouter = createBrowserRouter([
   {
@@ -43,6 +47,10 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

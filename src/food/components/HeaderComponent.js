@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import { LOGO_URL } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 const HeaderComponent = () => {
   const onlineStatus = useOnlineStatus();
+  const cartItems = useSelector((store) => store.cart.items);
   return (
     <div className="flex justify-between items-center bg-green-100">
       <div>
@@ -24,12 +26,12 @@ const HeaderComponent = () => {
           <Link to={"/grocery"}>
             <li>Grocery</li>
           </Link>
-          <Link>
-            <li>Cart</li>
+          <Link to={"/cart"}>
+            <li className="font-bold text-xl">Cart-{cartItems?.length}items</li>
           </Link>
         </ul>
       </div>
     </div>
   );
 };
-export default HeaderComponent
+export default HeaderComponent;
